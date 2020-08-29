@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <form method="post" class="form">
+    {% csrf_token %}
+
+    <p>Are you sure you want to delete the "{{ object.name }}" bill?</p>
+    <button type="submit" class="btn btn-outline-success">Delete Bill</button>
+    <a href="/" type="button" class="btn btn-outline-danger">Cancel</a></td>
+  </form>
+{% endblock %}

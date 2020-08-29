@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if bill_list %}
+{% if messages %}
+{% endif %}
+
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Bill ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Due Date</th>
+      <th></th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for bill in bill_list %}
+      <tr>
+        <td><a href="bill/{{bill.id}}/">{{ bill.id }}</a></td>
+        <td>{{ bill.name }}</td>
+        <td>{{ bill.amount }}</td>
+        <td>{{ bill.due_date }}</td>
+        <td><a href="bill/{{bill.id}}/pay/" type="button" class="btn btn-outline-primary">Pay</a></td></td>
+        <td><a href="bill/{{bill.id}}/delete/" type="button" class="btn btn-outline-danger">Delete</a></td>
+      </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+
+{% endif %}
+<a href="bill/add/" type="button" class="btn btn-outline-primary">Add Bill</a></td>
+<div class="messages pt-3">
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    $(".messages").fadeOut(3000, function() {
+      $(this).remove();
+    });
+
+    $(".post-form")[0].reset(); // this is to reset the form
+</script>
+
+{% endblock %}
